@@ -57,6 +57,7 @@ exp('requestScreenshotUpload', (url: string, field: string, options: any, cb: (r
     realOptions.targetURL = url;
     realOptions.targetField = field;
     realOptions.resultURL = `http://${GetCurrentResourceName()}/screenshot_created`;
+    realOptions.fields = realOptions.fields || {};
     
     realOptions.correlation = registerCorrelation(realCb);
 

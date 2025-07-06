@@ -24,6 +24,7 @@ class ScreenshotRequest {
 
     targetURL: string;
     targetField: string;
+    fields: { [key: string]: any };
 }
 
 // from https://stackoverflow.com/a/12300351
@@ -191,6 +192,15 @@ class ScreenshotUI {
         const getFormData = () => {
             const formData = new FormData();
             formData.append(request.targetField, dataURItoBlob(imageURL), `screenshot.${request.encoding}`);
+        
+            // add additional fields if provided
+            if (request.fields) {
+                for (const key in request.fields) {
+                    if (request.fields.hasOwnProperty(key)) {
+                        formData.append(key, request.fields[key]);
+                    }
+                }
+            }
 
             return formData;
         };
